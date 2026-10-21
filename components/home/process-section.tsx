@@ -4,6 +4,13 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { Noto_Serif_Bengali } from "next/font/google"
+import Lottie from "lottie-react"
+import { ClipboardCheck, Handshake, Ruler, Settings, Sparkles } from "lucide-react"
+import consultationAnimation from "./lottie/consultation.json"
+import designAnimation from "./lottie/design.json"
+import planningAnimation from "./lottie/planning.json"
+import executionAnimation from "./lottie/execution.json"
+import handoverAnimation from "./lottie/handover.json"
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali"],
@@ -14,7 +21,7 @@ interface ProcessStep {
   number: string
   title: string
   description: string
-  videoSrc: string
+  icon: string
 }
 
 const processSteps: ProcessStep[] = [
@@ -23,48 +30,73 @@ const processSteps: ProcessStep[] = [
     title: "Consultation",
     description:
       "একটি in-depth discussion-এর মাধ্যমে আমরা আপনার space, budget এবং design preferences বুঝে নিই।",
-    videoSrc: "/icon/consultation.mp4",
+    icon: "consultation",
   },
   {
     number: "02",
     title: "Concept & Design",
     description:
       "আমাদের ডিজাইনাররা আপনার জন্য তৈরি করেন custom layouts, material selection এবং 3D visualizations।",
-    videoSrc: "/icon/design-drawing.mp4",
+    icon: "design-drawing",
   },
   {
     number: "03",
     title: "Detailed Planning",
     description: "সবকিছু নিখুঁত রাখতে আমরা prepare করি detailed drawings, accurate budget এবং project timeline।",
-    videoSrc: "/icon/person-reading-map.mp4",
+    icon: "person-reading-map",
   },
   {
     number: "04",
     title: "Execution",
     description:
       "Production থেকে final installation—সবকিছু আমাদের expert team rigorous quality control-এর মাধ্যমে manage করে।",
-    videoSrc: "/icon/bricks.mp4",
+    icon: "bricks",
   },
   {
     number: "05",
     title: "Handover",
     description: "আপনার beautifully finished space টিম বুঝিয়ে দেওয়া হয়, ready for you to live and work।",
-    videoSrc: "/icon/alms.mp4",
+    icon: "alms",
   },
 ]
 
-function StepVideo({ src, title }: { src: string; title: string }) {
+function StepIcon({ icon, title }: { icon: string; title: string }) {
+  const commonClass = "h-16 w-16 rounded-md flex items-center justify-center"
+  const animationMap: Record<string, object> = {
+    consultation: consultationAnimation,
+    "design-drawing": designAnimation,
+    "person-reading-map": planningAnimation,
+    bricks: executionAnimation,
+    alms: handoverAnimation,
+  }
+  const iconMap = {
+    consultation: Handshake,
+    "design-drawing": Sparkles,
+    "person-reading-map": Ruler,
+    bricks: Settings,
+    alms: ClipboardCheck,
+  } as const
+
+  const animationData = animationMap[icon] ?? consultationAnimation
+  const IconFallback = iconMap[icon as keyof typeof iconMap] ?? Sparkles
+
   return (
-    <video
-      src={src}
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="metadata"
-      className="h-16 w-16 rounded-md object-cover"
-      aria-label={`${title} video icon`}
-    />
+    <div className={`${commonClass} bg-white relative`} aria-label={`${title} icon`}>
+      <Lottie
+        animationData={animationData}
+        loop
+        autoplay
+        className="absolute inset-0 h-full w-full opacity-80"
+        rendererSettings={{ preserveAspectRatio: "xMidYMid meet" }}
+      />
+      <motion.div
+        className="relative z-10"
+        animate={{ scale: [0.95, 1, 0.97, 1], y: [0, -1.5, 0] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <IconFallback className="h-8 w-8 text-[#0d3d3d]" strokeWidth={1.9} />
+      </motion.div>
+    </div>
   )
 }
 
@@ -91,7 +123,7 @@ function MobileStep({ step, index }: { step: ProcessStep; index: number }) {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="text-[#a57c00]"
           >
-            <StepVideo src={step.videoSrc} title={step.title} />
+            <StepIcon icon={step.icon} title={step.title} />
           </motion.div>
 
           <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#a57c00] text-white text-xs font-bold flex items-center justify-center">
@@ -160,7 +192,7 @@ function HorizontalFlow() {
                     transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
                     className="group-hover:scale-110 transition-transform"
                   >
-                    <StepVideo src={step.videoSrc} title={step.title} />
+                    <StepIcon icon={step.icon} title={step.title} />
                   </motion.div>
                 </div>
 

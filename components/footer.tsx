@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { MapPin, Phone, Mail, ArrowRight, Instagram, Facebook, Linkedin, Youtube } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -99,9 +100,12 @@ export function Footer() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <img
+                <Image
                   src="/images/logo3.png"
                   alt="Aesthetic Interior Studio"
+                  width={160}
+                  height={70}
+                  loading="lazy"
                   className="h-auto w-40 group-hover:opacity-80 transition-opacity"
                 />
               </motion.div>

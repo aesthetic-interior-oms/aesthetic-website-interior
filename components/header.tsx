@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -47,9 +48,12 @@ export function Header() {
 			<nav className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div className="flex h-20 items-center justify-between">
 					<Link href="/" className="flex items-center">
-						<img
+						<Image
 							src="/Logo/HeaderLogo.png"
 							alt="Aesthetic Interior Studio"
+							width={220}
+							height={72}
+							priority
 							className="h-12 w-auto"
 						/>
 						{/* <span className="ml-2 font-serif text-xl text-[#0d3d3d]">Aesthetic Interior Studio</span> */}

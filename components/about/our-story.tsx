@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 
 const timelineSteps = [
   {
@@ -174,9 +175,13 @@ export function OurStory() {
                       } ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                   >
                     <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-lg group">
-                      <img
+                      <Image
                         src={step.image || "/placeholder.svg"}
-                        alt={step.title}
+                        alt={`${step.title} milestone image`}
+                        width={1200}
+                        height={900}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        loading="lazy"
                         className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? "scale-100 group-hover:scale-110" : "scale-110"
                           }`}
                       />

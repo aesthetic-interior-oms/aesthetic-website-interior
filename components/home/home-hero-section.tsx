@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { Noto_Serif_Bengali } from "next/font/google"
@@ -129,16 +130,26 @@ export function HomeHeroSection() {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          <picture>
-            <source media="(max-width: 1023px)" srcSet={slide.mobileImage || slide.image || "/placeholder.svg"} />
-            <img
-              src={slide.image || "/placeholder.svg"}
-              alt={slide.title}
-              className={`h-full w-full object-cover transition-transform duration-[7000ms] ${
-                index === currentSlide ? "scale-105" : "scale-100"
-              }`}
-            />
-          </picture>
+          <Image
+            src={slide.image || "/placeholder.svg"}
+            alt={`${slide.title} interior design hero image`}
+            fill
+            priority={index === 0}
+            sizes="100vw"
+            className={`hidden lg:block h-full w-full object-cover transition-transform duration-[7000ms] ${
+              index === currentSlide ? "scale-105" : "scale-100"
+            }`}
+          />
+          <Image
+            src={slide.mobileImage || slide.image || "/placeholder.svg"}
+            alt={`${slide.title} interior design hero image`}
+            fill
+            priority={index === 0}
+            sizes="100vw"
+            className={`lg:hidden h-full w-full object-cover transition-transform duration-[7000ms] ${
+              index === currentSlide ? "scale-105" : "scale-100"
+            }`}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/50 to-black/35" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(165,124,0,0.25),transparent_42%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.15),transparent_45%)]" />

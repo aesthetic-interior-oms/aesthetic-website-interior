@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export function CtaSection() {
   const router = useRouter()
@@ -11,9 +12,12 @@ export function CtaSection() {
     <section className="py-20 lg:py-32 relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/beautiful-modern-interior-design-living-space-warm.jpg"
-          alt="Interior design background"
+          alt="Warm modern living space interior design background"
+          fill
+          sizes="100vw"
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-[#0d3d3d]/80" />

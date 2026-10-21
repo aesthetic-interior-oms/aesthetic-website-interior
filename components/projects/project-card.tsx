@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 interface ProjectCardProps {
@@ -29,9 +30,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="aspect-[4/5] overflow-hidden">
-        <img
+        <Image
           src={project.image || "/placeholder.svg"}
-          alt={project.title}
+          alt={`${project.title} in ${project.location}`}
+          width={800}
+          height={1000}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           className={cn(
             "w-full h-full object-cover transition-transform duration-700",
             isHovered ? "scale-110" : "scale-100",

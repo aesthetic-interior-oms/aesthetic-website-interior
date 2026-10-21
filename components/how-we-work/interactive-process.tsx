@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import {
     MessageSquare,
     Users,
@@ -268,9 +269,12 @@ function ImageCard({ stage }: { stage: Stage }) {
 
             {/* Image container */}
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                <img
+                <Image
                     src={stage.imageSrc || "/placeholder.svg"}
-                    alt={stage.title}
+                    alt={`${stage.title} stage interior visual`}
+                    width={1200}
+                    height={900}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className={`w-full h-[450px] md:h-[550px] object-cover transition-all duration-700 ${isHovered ? "scale-110" : "scale-100"
                         }`}
                 />

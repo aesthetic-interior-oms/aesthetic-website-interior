@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from "next/image"
 
 interface HeroProps {
   subtitle: string
@@ -21,10 +22,16 @@ export function Hero({
 }: HeroProps) {
   return (
     <section className="relative overflow-hidden min-h-screen">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed opacity-20 bg-[#e8e4de]"
-        style={{ backgroundImage: `url('${backgroundImage}')` }}
-      />
+      <div className="absolute inset-0 bg-[#e8e4de]">
+        <Image
+          src={backgroundImage}
+          alt={`${subtitle} hero background`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-20"
+        />
+      </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 lg:px-8 py-32 md:py-40 flex flex-col items-center justify-center text-center min-h-screen">
         {/* Accent line */}
         <div className="mb-8 flex items-center justify-center gap-3">

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 
 const partners = [
   { name: "Bosch", logo: "/bosch-brand-logo-simple.jpg" },
@@ -76,9 +77,13 @@ export function PartnersSection() {
             key={`${partner.name}-${index}`}
             className="flex-shrink-0 flex items-center justify-center w-40 h-20 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
           >
-            <img
+            <Image
               src={partner.logo || "/placeholder.svg"}
-              alt={partner.name}
+              alt={`${partner.name} brand logo`}
+              width={160}
+              height={80}
+              sizes="160px"
+              loading="lazy"
               className="max-w-full max-h-full object-contain"
             />
           </div>
