@@ -5,20 +5,27 @@ import Image from "next/image"
 
 interface HeroProps {
   subtitle: string
+  subtitleNote?: string
+  subtitleNotePosition?: string
+  subtitleNoteClassName?: string
   title: string
   titleHighlight: string
   description: string
   buttonText: string
   backgroundImage?: string
+  backgroundImageClassName?: string
 }
 
 export function Hero({
   subtitle,
+  subtitleNote,
+  subtitleNoteClassName,
   title,
   titleHighlight,
   description,
   buttonText,
   backgroundImage = '/background/background9.jpg',
+  backgroundImageClassName = 'object-cover object-center opacity-20',
 }: HeroProps) {
   return (
     <section className="relative overflow-hidden min-h-screen">
@@ -29,7 +36,7 @@ export function Hero({
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-20"
+          className={backgroundImageClassName}
         />
       </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 lg:px-8 py-32 md:py-40 flex flex-col items-center justify-center text-center min-h-screen">
@@ -46,6 +53,12 @@ export function Hero({
           </motion.p>
           <div className="h-px w-8 bg-[#a57c00]" />
         </div>
+
+        {subtitleNote && (
+          <p className={subtitleNoteClassName ?? "text-sm text-gray-500 mb-4"}>
+            {subtitleNote}
+          </p>
+        )}
 
         {/* Main Heading */}
         <motion.h1

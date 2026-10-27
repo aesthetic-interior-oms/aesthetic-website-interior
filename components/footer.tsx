@@ -178,7 +178,9 @@ export function Footer() {
             <h3 className="font-semibold text-sm uppercase tracking-widest text-[#a57c00] mb-6">Contact</h3>
             <div className="space-y-4">
               <motion.a
-                href="#"
+                href="https://www.google.com/maps/place/AESTHETIC+INTERIOR+STUDIO/@23.8041425,90.3675127,17z/data=!3m1!4b1!4m6!3m5!1s0x3755c1004bf76709:0xe781044b3428d1bc!8m2!3d23.8041425!4d90.3700876!16s%2Fg%2F11w324ds2h"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3 text-white/70 hover:text-[#a57c00] transition-colors group"
               >
@@ -194,12 +196,12 @@ export function Footer() {
                 <span className="text-sm">+88 0132969 4663</span>
               </motion.a>
               <motion.a
-                href="mailto:aestheticinterior0029laus@gmail.com"
+                href="mailto:hello@aestheticinteriorbd.com"
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-3 text-white/70 hover:text-[#a57c00] transition-colors"
               >
                 <Mail className="h-5 w-5 text-[#a57c00] flex-shrink-0" />
-                <span className="text-sm break-all">hello@aestheticinterior.com</span>
+                <span className="text-sm break-all">hello@aestheticinteriorbd.com</span>
               </motion.a>
             </div>
           </motion.div>
@@ -219,8 +221,8 @@ export function Footer() {
             © {new Date().getFullYear()} Aesthetic Interior Studio. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-white/50">
-            <Link href="#" className="hover:text-[#a57c00] transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-[#a57c00] transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-[#a57c00] transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-[#a57c00] transition-colors">Terms of Service</Link>
           </div>
         </div>
       </motion.div>

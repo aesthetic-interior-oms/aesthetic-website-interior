@@ -1,6 +1,29 @@
+import type { Metadata } from "next"
+
+import { BreadcrumbJsonLd } from "@/components/website/seo/json-ld"
+import { siteName } from "@/lib/site"
+
+export const metadata: Metadata = {
+  title: `Privacy Policy | ${siteName}`,
+  description: `Privacy Policy for ${siteName}. Learn how we collect, use, and protect your information.`,
+  alternates: {
+    canonical: "/privacy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20 font-sans">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy" },
+        ]}
+      />
       <h1 className="mb-6 text-3xl font-bold">Privacy Policy for Aesthetic Interior</h1>
       <p className="mb-8 text-sm text-gray-600">Last Updated: March 30, 2026</p>
 

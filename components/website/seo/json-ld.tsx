@@ -183,3 +183,60 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
 
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
+
+export function ProjectJsonLd({
+  project,
+}: {
+  project: {
+    title: string
+    description?: string | null
+    slug: string
+    bannerImage?: string | null
+    images?: string[]
+    location?: string | null
+    category?: string
+  }
+}) {
+  const imageUrls = [
+    ...(project.bannerImage ? [absoluteUrl(project.bannerImage)] : []),
+    ...(project.images ? project.images.map((img) => absoluteUrl(img)) : []),
+  ]
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": absoluteUrl(`/projects/${project.slug}#project`),
+    headline: project.title,
+    name: project.title,
+    description: project.description || `${project.title} - Interior design project by ${siteName}`,
+    url: absoluteUrl(`/projects/${project.slug}`),
+    image: imageUrls.length ? imageUrls : undefined,
+    author: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+    },
+    creator: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/Logo/HeaderLogo.png"),
+      },
+    },
+    contentLocation: project.location
+      ? {
+          "@type": "Place",
+          name: project.location,
+        }
+      : undefined,
+  }
+
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+}
